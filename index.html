@@ -71,16 +71,23 @@
         <div class="btn-group" role="group" aria-label="...">          
           <button type="button" class="btn btn-default btn-control" id="iconChange"><i id="player_audio" class="fa fa-3x fa-play" aria-hidden="true"></i></button>
           <!-- <button type="button" class="btn btn-default"><i class="fa fa-step-forward fa-3x" aria-hidden="true"></i></button> -->
-          <button type="button" class="btn btn-default btn-sad"><img src="mood-icons/png/sad.png" width="42px"></button>
+          <button type="button" class="btn btn-default btn-sad"><img id="sad_icon" src="mood-icons/png/sad.png" width="42px"></button>
           <button type="button" class="btn btn-default btn-happy"><img src="mood-icons/png/happy.png" width="42px"></button>
           <button type="button" class="btn btn-default btn-control"><i class="fa fa-random fa-3x" aria-hidden="true"></i></button>
         </div>
 
       </div>
+
+      <audio controls mediaGroup>
+        <source src="audio/1.mp3" type="audio/mpeg">
+        <source src="audio/2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
       
       
 
     </div><!-- /.container -->
+
 
 
     <!-- Bootstrap core JavaScript
@@ -90,6 +97,8 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- Toggle Play/Pause icons -->
     <script type="text/javascript">
       $('#iconChange').click(function(){
           $(this).find('i').toggleClass('fa-play fa-pause');
@@ -97,12 +106,14 @@
       });
     </script>
     
+    <!-- Toggle Play/Pause audio based on icon -->
     <script type="text/javascript">
-      var paused = true;
-      var song = '1.mp3';
-      var audio = new Audio('audio/' + song);
-      $('#player_audio').click(function() {
 
+      var song = '1'; //will be a random value latter
+      var audio = new Audio('audio/' + song + '.mp3');
+      var setting = "shuffle";
+
+      $('#player_audio').click(function() {
         var x = document.getElementById("player_audio")
         if (x.className == "fa fa-3x fa-play") {
           audio.play();
@@ -112,8 +123,43 @@
           audio.pause();
           console.log('music paused');
         }
-        
+
+        audio.addEventListener('ended',function() {
+          switch (setting) {
+            case "shuffle":
+              next_song = 1;
+              console.log("Shuffle");
+              break;
+            case "sad":
+              next_song = 2;
+              console.log("Sad Playlist");
+              break;
+            case "happy":
+              next_song = 3;
+              console.log("Happy Playlist");
+              break;
+            default:
+              next_song = 1;
+              console.log("Shuffle");
+          }
+
+          audio = new Audio('audio/' + next_song.toString() + '.mp3');
+          audio.load();
+          audio.play();
+          console.log("Playing next song");
+        })
       });
+
+      $('#sad_icon').click(function() {
+        setting = "sad";
+        console.log("Selected Sad Playlist");
+      })
+
+      $('happy_icon').click(function() {
+        setting = "happy";
+        console.log("Selected Happy Playlist");
+      })
+
     </script>
 
   </body>
