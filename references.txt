@@ -1,0 +1,3 @@
+play music: http://stackoverflow.com/questions/9419263/playing-audio-with-javascript
+pause music: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
+icon toggle: http://stackoverflow.com/questions/26851286/font-awesome-icons-toggles-twice-on-click
