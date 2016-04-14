@@ -1,19 +1,24 @@
-var audio = new Audio('audio/1.mp3');
+var sad_songs = [1,2,3];
+var happy_songs = [4,5,6];
+var audio = new Audio("audio/" + getRandom() + ".mp3");
 var setting = "shuffle";
-var next_song = 1;
+
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (sad_songs.length + happy_songs.length)) + 1;
+}
 
 $('#play-icon').click(function(){
-    var x = document.getElementById("player_audio")
-      if (x.className == "fa fa-3x fa-play") {
-        audio.play();
-        console.log('music playing');
-      }
-      else {
-        audio.pause();
-        console.log('music paused');
-      }
-    $(this).find('i').toggleClass('fa-play fa-pause');
-    $(this).find('button').toggleClass('onclick="audio.play()" onclick="audio.pause()"');
+  var x = document.getElementById("player_audio")
+    if (x.className == "fa fa-3x fa-play") {
+      audio.play();
+      console.log('music playing');
+    }
+    else {
+      audio.pause();
+      console.log('music paused');
+    }
+  $(this).find('i').toggleClass('fa-play fa-pause');
+  $(this).find('button').toggleClass('onclick="audio.play()" onclick="audio.pause()"');
 });
 
 $('#forward-icon').click(function() {
@@ -60,7 +65,7 @@ audio.addEventListener('ended',function() {
 function find_new_song() {
   switch (setting) {
       case "shuffle":
-        next_song = 1;
+        next_song = getRandom();
         console.log("Shuffle");
         break;
       case "sad":
@@ -72,10 +77,11 @@ function find_new_song() {
         console.log("Happy Playlist");
         break;
       default:
-        next_song = 1;
+        next_song = getRandom();
         console.log("Shuffle");
     }
   audio.src = ('audio/' + next_song.toString() + '.mp3');
   audio.load();
   audio.play();
+  console.log("Playing song: " + next_song);
 }
