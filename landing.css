@@ -7,12 +7,26 @@
 }
 
 body {
-  padding-top: 50px;
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  background: none;
+	font-family: 'Lato', sans-serif;
+	padding-top: 50px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background: none;
 }
+
+.navbar {
+	font-weight: 100;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+}
+
+h1 {
+	
+	font-weight: 100;
+	font-size: 80px;
+}
+
 .player {
   padding: 40px 15px; 
 }
