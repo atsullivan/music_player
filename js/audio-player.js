@@ -21,19 +21,22 @@ $('#forward-icon').click(function() {
 })
 
 $('#sad-icon').click(function() {
-  setting = "sad";
-  console.log("Setting = Sad");
+  set_setting("sad");
 })
 
 $('#happy-icon').click(function() {
-  setting = "happy";
-  console.log("Setting = Happy");
+  set_setting("happy");
 })
 
 $('#shuffle-icon').click(function() {
-  setting = "shuffle";
-  console.log("Setting = Shuffle");
+  set_setting("shuffle");
 })
+
+function set_setting(choice) {
+  setting = choice;
+  document.getElementById("alert-area").textContent = choice.charAt(0).toUpperCase() + choice.slice(1) + " Mode";
+  console.log("Setting = " + choice);
+}
 
 audio.addEventListener('ended',function() {
   find_new_song();
