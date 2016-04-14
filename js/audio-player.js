@@ -1,10 +1,10 @@
 var sad_songs = [1,2,3];
 var happy_songs = [4,5,6];
-var audio = new Audio("audio/" + getRandom() + ".mp3");
+var audio = new Audio("audio/" + getRandom(1, (sad_songs.length + happy_songs.length)) + ".mp3");
 var setting = "shuffle";
 
 function getRandom(min, max) {
-  return Math.floor(Math.random() * (sad_songs.length + happy_songs.length)) + 1;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 $('#play-icon').click(function(){
@@ -69,19 +69,19 @@ audio.addEventListener('ended',function() {
 function find_new_song() {
   switch (setting) {
       case "shuffle":
-        next_song = getRandom();
+        next_song = getRandom(1, (sad_songs.length + happy_songs.length));
         console.log("Shuffle");
         break;
       case "sad":
-        next_song = 2;
+        next_song = getRandom(sad_songs[0], sad_songs.length);
         console.log("Sad Playlist");
         break;
       case "happy":
-        next_song = 3;
+        next_song = getRandom(happy_songs[0], (sad_songs.length + happy_songs.length));
         console.log("Happy Playlist");
         break;
       default:
-        next_song = getRandom();
+        next_song = getRandom(1, (sad_songs.length + happy_songs.length));
         console.log("Shuffle");
     }
   audio.src = ('audio/' + next_song.toString() + '.mp3');
