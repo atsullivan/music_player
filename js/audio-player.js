@@ -33,7 +33,22 @@ $('#shuffle-icon').click(function() {
 })
 
 function set_setting(choice) {
+  var alert_mode = "success";
   setting = choice;
+  switch (choice) {
+    case "shuffle":
+      alert_mode = "success";
+      break;
+    case "sad":
+      alert_mode = "info";
+      break;
+    case "happy":
+      alert_mode = "danger";
+      break;
+    default:
+      alert_mode = "success";
+  }
+  document.getElementById("alert-area").className = "alert alert-" + alert_mode;
   document.getElementById("alert-area").textContent = choice.charAt(0).toUpperCase() + choice.slice(1) + " Mode";
   console.log("Setting = " + choice);
 }
