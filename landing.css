@@ -1,34 +1,51 @@
+.full {
+  background: url('img/bg.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 body {
   padding-top: 50px;
   text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background: none;
 }
 .player {
   padding: 40px 15px; 
 }
 
 .btn-sad {
-	background-color: #98E5EC;
 	-webkit-transition: 1s;
 }
 
 .btn-sad:hover {
-	background-color: white;
+	background-color: #96aacf;
 }
 
-.btn-happy {
-	background-color: #FF7676;
+.btn-happy {	
 	-webkit-transition: 1s;
 }
 
 .btn-happy:hover {
-	background-color: white;
+	background-color: #83E4B5;
 }
 
-.btn-control {
-	background-color: #F9F7F7;
+.btn-shuffle {
+	background-color: #d9d9d9;
 	-webkit-transition: 1s;
 }
 
-.btn-control:hover {
+.alert-custom {
 	background-color: white;
+}
+
+.btn-control:focus {
+	background-color: white;
+}
+
+.btn:focus {
+    outline: none;
 }

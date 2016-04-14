@@ -1,7 +1,12 @@
+var default_color = "white";
+var sad_color = "#96aacf";
+var happy_color = "#83E4B5";
+var shuffle_color = "#d9d9d9";
 var sad_songs = [1,2,3];
 var happy_songs = [4,5,6];
 var audio = new Audio("audio/" + getRandom(1, (sad_songs.length + happy_songs.length)) + ".mp3");
 var setting = "shuffle";
+
 
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -21,6 +26,17 @@ $('#play-icon').click(function(){
   $(this).find('button').toggleClass('onclick="audio.play()" onclick="audio.pause()"');
 });
 
+$('#backward-icon').click(function() {
+  var x = document.getElementById("player_audio")
+  if (x.className == "fa fa-3x fa-play") {
+    x.className = 'fa fa-3x fa-pause';
+  }
+  audio.src = ('audio/' + previous_song.toString() + '.mp3');
+  audio.load();
+  audio.play();
+  console.log("Playing previous song: " + next_song);
+})
+
 $('#forward-icon').click(function() {
   var x = document.getElementById("player_audio")
   if (x.className == "fa fa-3x fa-play") {
@@ -30,7 +46,8 @@ $('#forward-icon').click(function() {
 })
 
 $('#sad-icon').click(function() {
-  set_setting("sad");
+  // document.getElementById("sad-icon").style.backgroundColor="#96aacf";
+  set_setting("sad", sad_color);
 })
 
 $('#happy-icon').click(function() {
@@ -41,24 +58,27 @@ $('#shuffle-icon').click(function() {
   set_setting("shuffle");
 })
 
-function set_setting(choice) {
-  var alert_mode = "success";
+function set_setting(choice, color) {
   setting = choice;
   switch (choice) {
-    case "shuffle":
-      alert_mode = "success";
+    case "shuffle":      
+      document.getElementById("shuffle-icon").style.backgroundColor=shuffle_color;
+      document.getElementById("sad-icon").style.backgroundColor=default_color;
+      document.getElementById("happy-icon").style.backgroundColor=default_color;
       break;
     case "sad":
-      alert_mode = "info";
+      document.getElementById("sad-icon").style.backgroundColor=sad_color;
+      document.getElementById("happy-icon").style.backgroundColor=default_color;
+      document.getElementById("shuffle-icon").style.backgroundColor=default_color;
       break;
     case "happy":
-      alert_mode = "danger";
+      document.getElementById("happy-icon").style.backgroundColor=happy_color;
+      document.getElementById("sad-icon").style.backgroundColor=default_color;
+      document.getElementById("shuffle-icon").style.backgroundColor=default_color;
       break;
     default:
-      alert_mode = "success";
+      
   }
-  document.getElementById("alert-area").className = "alert alert-" + alert_mode;
-  document.getElementById("alert-area").textContent = choice.charAt(0).toUpperCase() + choice.slice(1) + " Mode";
   console.log("Setting = " + choice);
 }
 
