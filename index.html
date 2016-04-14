@@ -69,20 +69,20 @@
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
 
         <div class="btn-group" role="group" aria-label="...">          
-          <button type="button" class="btn btn-default btn-control" id="iconChange"><i id="player_audio" class="fa fa-3x fa-play" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default btn-control" id="playButton"><i id="player_audio" class="fa fa-3x fa-play" aria-hidden="true"></i></button>
           <!-- <button type="button" class="btn btn-default"><i class="fa fa-step-forward fa-3x" aria-hidden="true"></i></button> -->
           <button type="button" class="btn btn-default btn-sad"><img id="sad_icon" src="mood-icons/png/sad.png" width="42px"></button>
-          <button type="button" class="btn btn-default btn-happy"><img src="mood-icons/png/happy.png" width="42px"></button>
-          <button type="button" class="btn btn-default btn-control"><i class="fa fa-random fa-3x" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-default btn-happy"><img id="happy_icon" src="mood-icons/png/happy.png" width="42px"></button>
+          <button type="button" class="btn btn-default btn-control"><i id="shuffle_icon" class="fa fa-random fa-3x" aria-hidden="true"></i></button>
         </div>
 
       </div>
 
-      <audio controls mediaGroup>
+      <!-- <audio controls mediaGroup>
         <source src="audio/1.mp3" type="audio/mpeg">
         <source src="audio/2.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
-      </audio>
+      </audio> -->
       
       
 
@@ -98,33 +98,43 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
-    <!-- Toggle Play/Pause icons -->
+    <!-- All JS for Audio Player -->
     <script type="text/javascript">
-      $('#iconChange').click(function(){
+      var audio = new Audio('audio/1.mp3');
+      var setting = "shuffle";
+      var next_song = 1;
+
+      $('#playButton').click(function(){
+          var x = document.getElementById("player_audio")
+            if (x.className == "fa fa-3x fa-play") {
+              audio.play();
+              console.log('music playing');
+            }
+            else {
+              audio.pause();
+              console.log('music paused');
+            }
           $(this).find('i').toggleClass('fa-play fa-pause');
           $(this).find('button').toggleClass('onclick="audio.play()" onclick="audio.pause()"');
       });
-    </script>
-    
-    <!-- Toggle Play/Pause audio based on icon -->
-    <script type="text/javascript">
 
-      var song = '1'; //will be a random value latter
-      var audio = new Audio('audio/' + song + '.mp3');
-      var setting = "shuffle";
+      $('#sad_icon').click(function() {
+        setting = "sad";
+        console.log("Setting = Sad");
+      })
 
-      $('#player_audio').click(function() {
-        var x = document.getElementById("player_audio")
-        if (x.className == "fa fa-3x fa-play") {
-          audio.play();
-          console.log('music playing');
-        }
-        else {
-          audio.pause();
-          console.log('music paused');
-        }
+      $('#happy_icon').click(function() {
+        setting = "happy";
+        console.log("Setting = Happy");
+      })
 
-        audio.addEventListener('ended',function() {
+      $('#shuffle_icon').click(function() {
+        setting = "shuffle";
+        console.log("Setting = Shuffle");
+      })
+
+      audio.addEventListener('ended',function() {
+        console.log("in switch");
           switch (setting) {
             case "shuffle":
               next_song = 1;
@@ -142,23 +152,14 @@
               next_song = 1;
               console.log("Shuffle");
           }
-
-          audio = new Audio('audio/' + next_song.toString() + '.mp3');
-          audio.load();
-          audio.play();
-          console.log("Playing next song");
-        })
-      });
-
-      $('#sad_icon').click(function() {
-        setting = "sad";
-        console.log("Selected Sad Playlist");
+        audio.src = ('audio/' + next_song.toString() + '.mp3');
+        audio.load();
+        audio.play();
+        console.log("Playing next song");
       })
+      
 
-      $('happy_icon').click(function() {
-        setting = "happy";
-        console.log("Selected Happy Playlist");
-      })
+      
 
     </script>
 
