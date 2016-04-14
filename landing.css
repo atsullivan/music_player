@@ -21,10 +21,18 @@ body {
 	letter-spacing: 3px;
 }
 
+.message {
+	padding-right: 200px;
+	padding-left: 200px;
+}
+
 h1 {
-	
 	font-weight: 100;
 	font-size: 80px;
+}
+
+h2 {
+	font-weight: 300;
 }
 
 .player {

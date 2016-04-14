@@ -7,7 +7,6 @@ var happy_songs = [4,5,6];
 var audio = new Audio("audio/" + getRandom(1, (sad_songs.length + happy_songs.length)) + ".mp3");
 var setting = "shuffle";
 
-
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -46,7 +45,6 @@ $('#forward-icon').click(function() {
 })
 
 $('#sad-icon').click(function() {
-  // document.getElementById("sad-icon").style.backgroundColor="#96aacf";
   set_setting("sad", sad_color);
 })
 
