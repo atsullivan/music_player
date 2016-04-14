@@ -22,6 +22,10 @@ $('#play-icon').click(function(){
 });
 
 $('#forward-icon').click(function() {
+  var x = document.getElementById("player_audio")
+  if (x.className == "fa fa-3x fa-play") {
+    x.className = 'fa fa-3x fa-pause';
+  }
   find_new_song();
 })
 
