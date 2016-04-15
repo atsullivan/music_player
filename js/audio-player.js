@@ -12,6 +12,7 @@ function getRandom(min, max) {
 }
 
 $('#play-icon').click(function(){
+  find_new_song();
   var x = document.getElementById("player_audio")
     if (x.className == "fa fa-3x fa-play") {
       audio.play();
@@ -106,4 +107,4 @@ function find_new_song() {
   audio.load();
   audio.play();
   console.log("Playing song: " + next_song);
-}
+} 
